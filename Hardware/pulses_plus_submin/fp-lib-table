@@ -1,0 +1,4 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "pulses_plus_submin")(type "KiCad")(uri "${KIPRJMOD}/pulses_plus_submin.pretty")(options "")(descr "Pulses Plus sub-mini project footprints"))
+)

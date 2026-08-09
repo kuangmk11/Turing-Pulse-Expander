@@ -1,0 +1,353 @@
+<title>Pulses Plus — Panel Layout Study (v1, superseded)</title>
+<style>
+  :root {
+    --ground: #E4E6E4;
+    --paper: #F4F5F3;
+    --ink: #16191B;
+    --ink-2: #4A5054;
+    --ink-3: #7C8388;
+    --rule: #C3C8C6;
+    --panel-face: #CDD2D1;
+    --panel-edge: #9AA1A0;
+    --panel-hole: #F4F5F3;
+    --led: #E8442B;
+    --dim: #2E7D8C;
+    --dead: #B0453C;
+    --shadow: rgba(20, 26, 28, 0.10);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground: #14181A; --paper: #1B2023; --ink: #E6EAE9; --ink-2: #A3ACAF;
+      --ink-3: #6D7679; --rule: #303739; --panel-face: #2A3134; --panel-edge: #4B5457;
+      --panel-hole: #14181A; --led: #FF6144; --dim: #57B7C9; --dead: #E0685C;
+      --shadow: rgba(0, 0, 0, 0.4);
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #14181A; --paper: #1B2023; --ink: #E6EAE9; --ink-2: #A3ACAF;
+    --ink-3: #6D7679; --rule: #303739; --panel-face: #2A3134; --panel-edge: #4B5457;
+    --panel-hole: #14181A; --led: #FF6144; --dim: #57B7C9; --dead: #E0685C;
+    --shadow: rgba(0, 0, 0, 0.4);
+  }
+  :root[data-theme="light"] {
+    --ground: #E4E6E4; --paper: #F4F5F3; --ink: #16191B; --ink-2: #4A5054;
+    --ink-3: #7C8388; --rule: #C3C8C6; --panel-face: #CDD2D1; --panel-edge: #9AA1A0;
+    --panel-hole: #F4F5F3; --led: #E8442B; --dim: #2E7D8C; --dead: #B0453C;
+    --shadow: rgba(20, 26, 28, 0.10);
+  }
+
+  body {
+    background: var(--ground); color: var(--ink);
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    line-height: 1.55; margin: 0; padding: 32px 20px 80px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .sheet {
+    max-width: 1000px; margin: 0 auto; background: var(--paper);
+    border: 1px solid var(--rule); box-shadow: 0 1px 3px var(--shadow);
+    padding: 36px 40px 44px;
+  }
+  .superseded {
+    background: color-mix(in srgb, var(--dead) 10%, transparent);
+    border-left: 3px solid var(--dead);
+    padding: 14px 18px; margin-bottom: 28px;
+    font-size: 14px; color: var(--ink-2);
+  }
+  .superseded strong { color: var(--ink); font-weight: 600; }
+  .titleblock {
+    display: flex; flex-wrap: wrap; gap: 24px 40px;
+    align-items: baseline; justify-content: space-between;
+    border-bottom: 2px solid var(--ink); padding-bottom: 14px;
+  }
+  h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.01em; margin: 0; }
+  .stamp {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--ink-3); text-align: right;
+  }
+  .lede { max-width: 66ch; margin: 22px 0 0; color: var(--ink-2); font-size: 15.5px; }
+  .lede strong { color: var(--ink); font-weight: 600; }
+  h2 {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--ink-3); margin: 48px 0 0; padding-bottom: 8px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .drawings {
+    display: flex; gap: 28px; align-items: flex-start;
+    overflow-x: auto; padding: 30px 2px 6px;
+  }
+  .opt { flex: 0 0 auto; }
+  .opt-head { display: flex; align-items: baseline; gap: 8px; margin-bottom: 12px; }
+  .opt-hp {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 19px; font-weight: 700; font-variant-numeric: tabular-nums;
+  }
+  .opt-tag { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); }
+  .opt-tag.pick { color: var(--led); font-weight: 700; }
+  .opt-note { font-size: 13px; color: var(--ink-2); margin: 14px 0 0; max-width: 210px; }
+  svg { display: block; }
+  .specs { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 14px; }
+  .specs th, .specs td {
+    text-align: left; padding: 9px 14px 9px 0;
+    border-bottom: 1px solid var(--rule); vertical-align: baseline;
+  }
+  .specs th {
+    font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--ink-3); font-weight: 700;
+  }
+  .specs td.num {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-variant-numeric: tabular-nums; white-space: nowrap;
+  }
+  .table-wrap { overflow-x: auto; }
+  .killed { margin-top: 22px; border-left: 3px solid var(--dead); padding: 4px 0 4px 18px; }
+  .killed p { margin: 0 0 10px; color: var(--ink-2); font-size: 15px; max-width: 64ch; }
+  .killed p:last-child { margin-bottom: 0; }
+  .sum {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 13px; color: var(--ink); font-variant-numeric: tabular-nums;
+  }
+  .notes { margin-top: 20px; max-width: 68ch; }
+  .notes p { margin: 0 0 14px; color: var(--ink-2); font-size: 15px; }
+  .notes p:last-child { margin-bottom: 0; }
+  .notes strong { color: var(--ink); font-weight: 600; }
+</style>
+
+<div class="sheet">
+  <div class="superseded">
+    <strong>Superseded by v2 (zigzag).</strong> Kept for reference. This iteration assumed a
+    two-column grid of toggles; the zigzag layout that replaced it fits the same parts in 6&nbsp;HP
+    with more finger room, by staggering toggles so that vertical pitch no longer has to clear a
+    toggle nut. The one lasting conclusion from this study is the vertical budget below, which is
+    what ruled out a single column for good.
+  </div>
+
+  <div class="titleblock">
+    <h1>Pulses Plus — front panel study</h1>
+    <div class="stamp">
+      3U · 128.5&nbsp;mm<br />
+      1&nbsp;HP = 5.08&nbsp;mm<br />
+      drawn to scale
+    </div>
+  </div>
+
+  <p class="lede">
+    Ten toggles, ten LEDs, three jacks. The width you pick barely matters —
+    <strong>the vertical budget is what decides this board.</strong> A 3U panel gives you about
+    110&nbsp;mm of usable height between the rails, and a single column of ten toggles plus three
+    jacks needs roughly 160&nbsp;mm. So the channels go into two columns no matter what, and the HP
+    you choose only buys you finger room.
+  </p>
+
+  <h2>Three viable layouts</h2>
+  <div class="drawings" id="drawings"></div>
+
+  <h2>What each one costs you</h2>
+  <div class="table-wrap">
+    <table class="specs">
+      <thead>
+        <tr>
+          <th>Layout</th><th>Panel width</th><th>Toggle pitch (V × H)</th>
+          <th>Gap between toggle nuts</th><th>Verdict</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>8&nbsp;HP</td><td class="num">40.2&nbsp;mm</td><td class="num">13.0 × 14.2&nbsp;mm</td>
+          <td class="num">4.8&nbsp;mm</td>
+          <td>Buildable, but you'll clip a neighbouring toggle mid-performance.</td>
+        </tr>
+        <tr>
+          <td>10&nbsp;HP</td><td class="num">50.4&nbsp;mm</td><td class="num">14.0 × 20.4&nbsp;mm</td>
+          <td class="num">11.0&nbsp;mm</td>
+          <td>Every toggle is independently grabbable.</td>
+        </tr>
+        <tr>
+          <td>12&nbsp;HP</td><td class="num">60.6&nbsp;mm</td><td class="num">16.0 × 26.5&nbsp;mm</td>
+          <td class="num">17.1&nbsp;mm</td>
+          <td>Room for real legends, and all three jacks share one row.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>The layout that doesn't work</h2>
+  <div class="killed">
+    <p>
+      A single column of channels — the layout that reads most naturally, one row per pulse, top to
+      bottom — cannot be made to fit, and it's worth seeing the arithmetic before you try:
+    </p>
+    <p class="sum">
+      10 toggles × 13&nbsp;mm + 3 jacks × 15&nbsp;mm = 175&nbsp;mm needed vs. ~110&nbsp;mm available
+    </p>
+    <p>
+      Even with sub-miniature toggles at a cramped 10&nbsp;mm pitch and jacks packed to 12.5&nbsp;mm,
+      you're still at 137&nbsp;mm. There is no single-column version of this module.
+    </p>
+  </div>
+
+  <h2>Reading the drawings</h2>
+  <div class="notes">
+    <p>
+      <strong>Channels run in reading order</strong> — 1 and 2 on the top row, 7 and 8 on the fourth.
+      Each toggle is on-off-on: up routes that pulse to Bus&nbsp;A, down to Bus&nbsp;B, centre is off.
+      The LED sits outboard of its toggle and taps the signal <em>before</em> the switch, so it always
+      shows that channel firing whether or not it's routed anywhere.
+    </p>
+    <p>
+      <strong>Channel 8 is the normalled one.</strong> It runs from PULSE8 off the ribbon — the bit
+      the stock Pulses never breaks out — until you patch the EXT jack, at which point the jack's
+      break contact hands that channel over to whatever you plugged in.
+    </p>
+    <p>
+      <strong>The two mode toggles</strong> sit below the channel block, one per bus, each selecting
+      OR or AND for that bus.
+    </p>
+  </div>
+</div>
+
+<script>
+  const S = 3.3, PH = 128.5, M = 26;
+
+  const layouts = [
+    {
+      hp: 8, tag: "tight", pick: false,
+      note: "Fits, but the toggles are 4.8 mm apart — that's less than a fingertip.",
+      sw: [13, 27.2], led: [4.6, 35.6], rows: [13, 26, 39, 52], modeY: 68,
+      outJacks: [[12, 90], [28.2, 90]], extJack: [20.1, 110],
+    },
+    {
+      hp: 10, tag: "recommended", pick: true,
+      note: "20.4 mm between columns, 14 mm between rows. You can grab any one toggle without touching its neighbour.",
+      sw: [15, 35.4], led: [5.5, 44.9], rows: [12, 26, 40, 54], modeY: 71,
+      outJacks: [[13, 93], [37.4, 93]], extJack: [25.2, 113],
+    },
+    {
+      hp: 12, tag: "roomy", pick: false,
+      note: "Buys you legible silkscreen legends and puts all three jacks in one row.",
+      sw: [17, 43.5], led: [7, 53.5], rows: [14, 30, 46, 62], modeY: 80,
+      outJacks: [[13, 103], [47.5, 103]], extJack: [30.3, 103],
+    },
+  ];
+
+  const NS = "http://www.w3.org/2000/svg";
+  const el = (n, a) => {
+    const e = document.createElementNS(NS, n);
+    for (const k in a) e.setAttribute(k, a[k]);
+    return e;
+  };
+  const X = (mm) => M + mm * S;
+  const Y = (mm) => M + mm * S;
+
+  function toggle(g, xmm, ymm) {
+    g.appendChild(el("circle", { cx: X(xmm), cy: Y(ymm), r: 4.75 * S, fill: "none",
+      stroke: "var(--panel-edge)", "stroke-width": 1 }));
+    g.appendChild(el("circle", { cx: X(xmm), cy: Y(ymm), r: 3 * S, fill: "var(--panel-hole)",
+      stroke: "var(--panel-edge)", "stroke-width": 1 }));
+    g.appendChild(el("line", { x1: X(xmm), y1: Y(ymm), x2: X(xmm), y2: Y(ymm) - 3.4 * S,
+      stroke: "var(--ink-2)", "stroke-width": 2.4, "stroke-linecap": "round" }));
+  }
+  function led(g, xmm, ymm) {
+    g.appendChild(el("circle", { cx: X(xmm), cy: Y(ymm), r: 1.5 * S, fill: "var(--led)" }));
+    g.appendChild(el("circle", { cx: X(xmm), cy: Y(ymm), r: 2.4 * S, fill: "none",
+      stroke: "var(--led)", "stroke-width": 0.8, opacity: 0.35 }));
+  }
+  function jack(g, xmm, ymm) {
+    g.appendChild(el("circle", { cx: X(xmm), cy: Y(ymm), r: 4 * S, fill: "none",
+      stroke: "var(--panel-edge)", "stroke-width": 1 }));
+    g.appendChild(el("circle", { cx: X(xmm), cy: Y(ymm), r: 3 * S, fill: "var(--panel-hole)",
+      stroke: "var(--panel-edge)", "stroke-width": 1 }));
+    g.appendChild(el("circle", { cx: X(xmm), cy: Y(ymm), r: 1.1 * S, fill: "var(--panel-edge)" }));
+  }
+  function label(g, xmm, ymm, text, o = {}) {
+    const t = el("text", {
+      x: X(xmm), y: Y(ymm), "text-anchor": o.anchor || "middle",
+      "font-family": "ui-monospace, SF Mono, Menlo, Consolas, monospace",
+      "font-size": o.size || 8.5, "letter-spacing": o.ls || 0.5,
+      fill: o.fill || "var(--ink-2)", "font-weight": o.weight || 400,
+    });
+    t.textContent = text;
+    g.appendChild(t);
+  }
+
+  const host = document.getElementById("drawings");
+
+  layouts.forEach((L) => {
+    const wmm = L.hp * 5.08 - 0.4;
+    const w = wmm * S + M * 2, h = PH * S + M * 2;
+
+    const wrap = document.createElement("div");
+    wrap.className = "opt";
+    const head = document.createElement("div");
+    head.className = "opt-head";
+    head.innerHTML = '<span class="opt-hp">' + L.hp + " HP</span>" +
+      '<span class="opt-tag' + (L.pick ? " pick" : "") + '">' + L.tag + "</span>";
+    wrap.appendChild(head);
+
+    const svg = el("svg", { width: w, height: h, viewBox: "0 0 " + w + " " + h,
+      role: "img", "aria-label": L.hp + " HP panel layout, drawn to scale" });
+    svg.appendChild(el("rect", { x: X(0), y: Y(0), width: wmm * S, height: PH * S,
+      fill: "var(--panel-face)", stroke: "var(--panel-edge)", "stroke-width": 1, rx: 1.5 }));
+
+    [4.5, PH - 4.5].forEach((ymm) => {
+      [3.5, wmm - 3.5].forEach((xmm) => {
+        svg.appendChild(el("circle", { cx: X(xmm), cy: Y(ymm), r: 1.6 * S,
+          fill: "var(--panel-hole)", stroke: "var(--panel-edge)", "stroke-width": 0.8 }));
+      });
+    });
+
+    const g = el("g", {});
+    svg.appendChild(g);
+
+    let ch = 1;
+    L.rows.forEach((ymm) => {
+      [0, 1].forEach((col) => {
+        toggle(g, L.sw[col], ymm);
+        led(g, L.led[col], ymm);
+        const inboard = col === 0 ? L.sw[0] + 6.6 : L.sw[1] - 6.6;
+        label(g, inboard, ymm + 1.1, String(ch), { size: 9, fill: "var(--ink)", weight: 700 });
+        ch++;
+      });
+    });
+
+    [0, 1].forEach((col) => {
+      toggle(g, L.sw[col], L.modeY);
+      led(g, L.led[col], L.modeY);
+      const inboard = col === 0 ? L.sw[0] + 6.6 : L.sw[1] - 6.6;
+      label(g, inboard, L.modeY + 1.1, col === 0 ? "A" : "B",
+        { size: 9, fill: "var(--ink)", weight: 700 });
+      label(g, L.sw[col], L.modeY - 6.4, "OR", { size: 6.5, fill: "var(--ink-3)" });
+      label(g, L.sw[col], L.modeY + 8.6, "AND", { size: 6.5, fill: "var(--ink-3)" });
+    });
+
+    L.outJacks.forEach(([xmm, ymm], i) => {
+      jack(g, xmm, ymm);
+      label(g, xmm, ymm + 8.2, i === 0 ? "OUT A" : "OUT B",
+        { size: 6.8, fill: "var(--ink-2)", weight: 700 });
+    });
+
+    jack(g, L.extJack[0], L.extJack[1]);
+    label(g, L.extJack[0], L.extJack[1] + 8.2, "EXT 8",
+      { size: 6.8, fill: "var(--ink-2)", weight: 700 });
+
+    const dy = Y(PH) + 13;
+    svg.appendChild(el("line", { x1: X(0), y1: dy, x2: X(wmm), y2: dy,
+      stroke: "var(--dim)", "stroke-width": 1 }));
+    [0, wmm].forEach((xmm) => {
+      svg.appendChild(el("line", { x1: X(xmm), y1: dy - 3.5, x2: X(xmm), y2: dy + 3.5,
+        stroke: "var(--dim)", "stroke-width": 1 }));
+    });
+    const dt = el("text", { x: X(wmm / 2), y: dy + 15, "text-anchor": "middle",
+      "font-family": "ui-monospace, SF Mono, Menlo, Consolas, monospace",
+      "font-size": 10, fill: "var(--dim)" });
+    dt.textContent = wmm.toFixed(1) + " mm";
+    svg.appendChild(dt);
+
+    wrap.appendChild(svg);
+    const note = document.createElement("p");
+    note.className = "opt-note";
+    note.textContent = L.note;
+    wrap.appendChild(note);
+    host.appendChild(wrap);
+  });
+</script>

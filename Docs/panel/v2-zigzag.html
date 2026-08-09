@@ -1,0 +1,481 @@
+<title>Pulses Plus — Panel Layout Study</title>
+<style>
+  :root {
+    --ground: #E4E6E4;
+    --paper: #F4F5F3;
+    --ink: #16191B;
+    --ink-2: #4A5054;
+    --ink-3: #7C8388;
+    --rule: #C3C8C6;
+    --panel-face: #CDD2D1;
+    --panel-edge: #9AA1A0;
+    --panel-hole: #F4F5F3;
+    --led: #E8442B;
+    --dim: #2E7D8C;
+    --warn: #B0453C;
+    --ok: #3F7A4E;
+    --shadow: rgba(20, 26, 28, 0.10);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground: #14181A;
+      --paper: #1B2023;
+      --ink: #E6EAE9;
+      --ink-2: #A3ACAF;
+      --ink-3: #6D7679;
+      --rule: #303739;
+      --panel-face: #2A3134;
+      --panel-edge: #4B5457;
+      --panel-hole: #14181A;
+      --led: #FF6144;
+      --dim: #57B7C9;
+      --warn: #E0685C;
+      --ok: #67B77C;
+      --shadow: rgba(0, 0, 0, 0.4);
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #14181A;
+    --paper: #1B2023;
+    --ink: #E6EAE9;
+    --ink-2: #A3ACAF;
+    --ink-3: #6D7679;
+    --rule: #303739;
+    --panel-face: #2A3134;
+    --panel-edge: #4B5457;
+    --panel-hole: #14181A;
+    --led: #FF6144;
+    --dim: #57B7C9;
+    --warn: #E0685C;
+    --ok: #67B77C;
+    --shadow: rgba(0, 0, 0, 0.4);
+  }
+  :root[data-theme="light"] {
+    --ground: #E4E6E4;
+    --paper: #F4F5F3;
+    --ink: #16191B;
+    --ink-2: #4A5054;
+    --ink-3: #7C8388;
+    --rule: #C3C8C6;
+    --panel-face: #CDD2D1;
+    --panel-edge: #9AA1A0;
+    --panel-hole: #F4F5F3;
+    --led: #E8442B;
+    --dim: #2E7D8C;
+    --warn: #B0453C;
+    --ok: #3F7A4E;
+    --shadow: rgba(20, 26, 28, 0.10);
+  }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    line-height: 1.55;
+    margin: 0;
+    padding: 32px 20px 80px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .sheet {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    box-shadow: 0 1px 3px var(--shadow);
+    padding: 36px 40px 44px;
+  }
+  .titleblock {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px 40px;
+    align-items: baseline;
+    justify-content: space-between;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 14px;
+  }
+  h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.01em; margin: 0; }
+  .stamp {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    text-align: right;
+  }
+  .verdict {
+    margin: 26px 0 0;
+    padding: 18px 22px;
+    border-left: 3px solid var(--ok);
+    background: color-mix(in srgb, var(--ok) 7%, transparent);
+  }
+  .verdict p { margin: 0; max-width: 68ch; font-size: 15.5px; color: var(--ink-2); }
+  .verdict p + p { margin-top: 12px; }
+  .verdict strong { color: var(--ink); font-weight: 600; }
+
+  h2 {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin: 48px 0 0;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .drawings {
+    display: flex;
+    gap: 44px;
+    align-items: flex-start;
+    overflow-x: auto;
+    padding: 30px 2px 6px;
+  }
+  .opt { flex: 0 0 auto; }
+  .opt-head { display: flex; align-items: baseline; gap: 8px; margin-bottom: 12px; }
+  .opt-hp {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 19px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+  .opt-tag { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); }
+  .opt-tag.pick { color: var(--ok); font-weight: 700; }
+  .opt-tag.edge { color: var(--warn); font-weight: 700; }
+  .opt-note { font-size: 13px; color: var(--ink-2); margin: 14px 0 0; max-width: 230px; }
+  svg { display: block; }
+
+  .specs { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 14px; }
+  .specs th, .specs td {
+    text-align: left;
+    padding: 9px 14px 9px 0;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: baseline;
+  }
+  .specs th {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    font-weight: 700;
+  }
+  .specs td.num {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .tight { color: var(--warn); font-weight: 600; }
+  .roomy { color: var(--ok); font-weight: 600; }
+  .table-wrap { overflow-x: auto; }
+
+  .notes { margin-top: 20px; max-width: 68ch; }
+  .notes p { margin: 0 0 14px; color: var(--ink-2); font-size: 15px; }
+  .notes p:last-child { margin-bottom: 0; }
+  .notes strong { color: var(--ink); font-weight: 600; }
+  .sum {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 13px;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+</style>
+
+<div class="sheet">
+  <div class="titleblock">
+    <h1>Pulses Plus — zigzag panel</h1>
+    <div class="stamp">
+      3U · 128.5&nbsp;mm<br />
+      1&nbsp;HP = 5.08&nbsp;mm<br />
+      drawn to scale
+    </div>
+  </div>
+
+  <div class="verdict">
+    <p>
+      <strong>Yes — 6&nbsp;HP fits, and stretching the zigzag makes it generous.</strong> Staggering
+      the toggles left and right of a centred LED column breaks the rule that killed the
+      single-column layout: vertical pitch no longer has to clear a toggle nut, because vertically
+      adjacent toggles are on opposite sides of the panel. With the bus block moved to the very
+      bottom, the channel zigzag stretches to fill everything above it — same-side toggles now sit
+      <strong>17.25&nbsp;mm apart</strong>, which is more finger room than any of the earlier
+      two-column layouts had, in half the width.
+    </p>
+    <p>
+      Lifting each LED 2.5&nbsp;mm above its toggle's row helps, but less than you'd hope: the gain
+      is diagonal, not linear, so the web of panel between nut and LED hole goes from 1.1&nbsp;mm to
+      <strong>1.6&nbsp;mm</strong>. Better — still thin. At 6&nbsp;HP the horizontal squeeze is
+      real, and <strong>the toggle you buy decides it</strong>, not the layout.
+    </p>
+  </div>
+
+  <h2>6 HP, and the same layout with room to breathe</h2>
+  <div class="drawings" id="drawings"></div>
+
+  <h2>Where the clearance goes</h2>
+  <div class="table-wrap">
+    <table class="specs">
+      <thead>
+        <tr>
+          <th>Layout</th>
+          <th>Panel width</th>
+          <th>Row pitch</th>
+          <th>Same-side toggle pitch</th>
+          <th>Nearest toggle (diagonal)</th>
+          <th>Nut&nbsp;→&nbsp;LED gap</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>6&nbsp;HP zigzag</td>
+          <td class="num">30.1&nbsp;mm</td>
+          <td class="num">8.6&nbsp;mm</td>
+          <td class="num">17.3&nbsp;mm</td>
+          <td class="num">16.9&nbsp;mm</td>
+          <td class="num tight">1.6&nbsp;mm</td>
+        </tr>
+        <tr>
+          <td>8&nbsp;HP zigzag</td>
+          <td class="num">40.2&nbsp;mm</td>
+          <td class="num">8.6&nbsp;mm</td>
+          <td class="num">17.3&nbsp;mm</td>
+          <td class="num">21.9&nbsp;mm</td>
+          <td class="num roomy">4.3&nbsp;mm</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>What's drawn, and what to watch</h2>
+  <div class="notes">
+    <p>
+      <strong>The layout.</strong> LEDs run straight down the centreline, one per channel, each
+      riding 2.5&nbsp;mm above its toggle's row with the channel number silkscreened directly
+      beneath it. That numbered anchor is what makes the alternation readable — the LED sits
+      2.5&nbsp;mm from its own switch and 6.1&nbsp;mm from the one above, so it reads as belonging
+      to the nearer one, and the number settles any doubt. Toggles alternate left, right, left,
+      right — throwing horizontally, so left routes that pulse to Bus&nbsp;A and right to Bus&nbsp;B,
+      centre off. The EXT jack continues the zigzag as the ninth position, one full step below
+      channel 8. Below the rule, the two buses sit side by side:
+      output jacks at the very bottom, their mode toggles directly above throwing vertically
+      (up&nbsp;=&nbsp;OR, down&nbsp;=&nbsp;AND), and the bus LED above that. Vertical throw on the
+      bus switches also means they never get confused with the routing switches by feel.
+    </p>
+    <p>
+      <strong>Pitch is set by the EXT jack.</strong> Landing it one full zigzag step below channel 8
+      and clearing the bus LEDs puts it at y&nbsp;=&nbsp;82, and that back-solves the channel pitch
+      to 8.625&nbsp;mm — so the zigzag fills the panel exactly rather than being padded to fit.
+    </p>
+    <p class="sum">
+      channels y = 13 … 73.4 · EXT jack y = 82 · bus LEDs 91 · mode toggles 99 · out jacks 113
+    </p>
+    <p>
+      <strong>Two body-clearance checks, both behind the panel.</strong> The first is the one that
+      moved: a vertical-throw toggle sitting directly above a jack puts a ~13&nbsp;mm-tall switch
+      body above a ~12.5&nbsp;mm-tall jack body. At the 14&nbsp;mm pitch drawn here they miss each
+      other by about 1.25&nbsp;mm — real, but thin. The second is unchanged: the channel toggles,
+      rotated 90° for horizontal throw, present that same ~13&nbsp;mm dimension <em>across</em> the
+      panel, and at 6&nbsp;HP the columns are only 14.5&nbsp;mm apart on centre. Measure your actual
+      switch before committing; the front looks fine long before the back does.
+    </p>
+    <p>
+      <strong>Switch selected: Adam Tech SW-T2-4X-E-A2-MA2</strong> — DPDT ON-OFF-ON, M6&nbsp;×&nbsp;0.75
+      bushing, PCB vertical. DPDT is an <em>electrical</em> requirement, not a preference: a
+      single-pole switch leaks the AND bus into the OR bus through its unselected throw. That's a
+      miniature bushing rather than sub-miniature, so the ø6.00&nbsp;mm hole above is exactly right
+      and the 1.6&nbsp;mm nut-to-LED gap stands. Behind the panel, the 13.2&nbsp;mm body against the
+      14.5&nbsp;mm column pitch leaves 1.3&nbsp;mm between adjacent bodies — tight, but it clears.
+    </p>
+    <p>
+      <strong>Panel gets the bushing hole only — no anti-rotation key hole.</strong> The datasheet's
+      recommended cut-out adds a ø2.40&nbsp;mm key hole 6.40&nbsp;mm from the bushing centre, which
+      would overlap the channel LED hole outright. The six solder pins stop the switch rotating once
+      it's PCB-mounted, so it isn't needed. Don't copy the datasheet cut-out into the panel DXF.
+    </p>
+    <p>
+      <strong>Still to measure: the nut.</strong> The datasheet gives the bushing thread but not the
+      hex nut's across-corners dimension — and that is the number that sets the 1.6&nbsp;mm gap.
+      Standard M6 toggle nuts run ~9–11&nbsp;mm across corners; at 11&nbsp;mm the gap collapses to
+      ~0.7&nbsp;mm and 6&nbsp;HP is off. That one measurement picks 6&nbsp;HP or 8&nbsp;HP.
+    </p>
+  </div>
+</div>
+
+<script>
+  const S = 3.3;      // px per mm
+  const PH = 128.5;   // panel height, mm
+  const M = 26;       // svg margin, px
+
+  // channel rows: 8 at 8.625 mm pitch, toggles alternating L/R.
+  // pitch is set by EXT jack landing one full step below channel 8, at y = 82.
+  const ROWS = [13, 21.6, 30.25, 38.9, 47.5, 56.1, 64.75, 73.4];
+  // channel LED rides 2.5 mm above its toggle's row; the channel number sits under the LED
+  const LED_RISE = 2.5;
+  const EXT_Y = 82;
+  // bottom block: LEDs, then vertical-throw mode toggles, then output jacks
+  const BUS_LED_Y = 91;
+  const BUS_SW_Y = 99;
+  const BUS_JACK_Y = 113;
+  // illustrative routing state so the drawing reads as a patch, not a template
+  const STATE = ["L", "C", "R", "L", "C", "C", "R", "L"];
+
+  const layouts = [
+    {
+      hp: 6, tag: "fits — barely", cls: "edge",
+      note: "The one you asked for. Vertically it now fills the panel at a luxurious 17.25 mm same-side pitch. Horizontally it's on the edge: 1.1 mm of aluminium between each toggle nut and its LED.",
+      swL: 7.8, swR: 22.3, led: 15.04,
+    },
+    {
+      hp: 8, tag: "same layout, +2 HP", cls: "pick",
+      note: "Identical geometry, 10 mm wider. The nut-to-LED gap goes from 1.1 mm to 4.0 mm and the toggle bodies stop arguing behind the panel.",
+      swL: 10, swR: 30.2, led: 20.12,
+    },
+  ];
+
+  const NS = "http://www.w3.org/2000/svg";
+  const el = (n, a) => {
+    const e = document.createElementNS(NS, n);
+    for (const k in a) e.setAttribute(k, a[k]);
+    return e;
+  };
+  const X = (mm) => M + mm * S;
+  const Y = (mm) => M + mm * S;
+
+  // throwDir: "L" / "R" for horizontal levers, "U" / "D" for vertical, "C" for centre-off
+  function toggle(g, xmm, ymm, throwDir) {
+    g.appendChild(el("circle", { cx: X(xmm), cy: Y(ymm), r: 4.6 * S, fill: "none",
+      stroke: "var(--panel-edge)", "stroke-width": 1 }));
+    g.appendChild(el("circle", { cx: X(xmm), cy: Y(ymm), r: 3 * S, fill: "var(--panel-hole)",
+      stroke: "var(--panel-edge)", "stroke-width": 1 }));
+    if (throwDir === "C") {
+      g.appendChild(el("circle", { cx: X(xmm), cy: Y(ymm), r: 1.3 * S,
+        fill: "var(--ink-2)" }));
+      return;
+    }
+    const vert = throwDir === "U" || throwDir === "D";
+    const sign = throwDir === "L" || throwDir === "U" ? -1 : 1;
+    const d = sign * 3.4 * S;
+    g.appendChild(el("line", {
+      x1: X(xmm), y1: Y(ymm),
+      x2: X(xmm) + (vert ? 0 : d),
+      y2: Y(ymm) + (vert ? d : 0),
+      stroke: "var(--ink-2)", "stroke-width": 2.4, "stroke-linecap": "round",
+    }));
+  }
+
+  function led(g, xmm, ymm) {
+    g.appendChild(el("circle", { cx: X(xmm), cy: Y(ymm), r: 1.5 * S, fill: "var(--led)" }));
+    g.appendChild(el("circle", { cx: X(xmm), cy: Y(ymm), r: 2.3 * S, fill: "none",
+      stroke: "var(--led)", "stroke-width": 0.8, opacity: 0.32 }));
+  }
+
+  function jack(g, xmm, ymm) {
+    g.appendChild(el("circle", { cx: X(xmm), cy: Y(ymm), r: 4 * S, fill: "none",
+      stroke: "var(--panel-edge)", "stroke-width": 1 }));
+    g.appendChild(el("circle", { cx: X(xmm), cy: Y(ymm), r: 3 * S, fill: "var(--panel-hole)",
+      stroke: "var(--panel-edge)", "stroke-width": 1 }));
+    g.appendChild(el("circle", { cx: X(xmm), cy: Y(ymm), r: 1.1 * S, fill: "var(--panel-edge)" }));
+  }
+
+  function label(g, xmm, ymm, text, o = {}) {
+    const t = el("text", {
+      x: X(xmm), y: Y(ymm),
+      "text-anchor": o.anchor || "middle",
+      "font-family": "ui-monospace, SF Mono, Menlo, Consolas, monospace",
+      "font-size": o.size || 8,
+      fill: o.fill || "var(--ink-2)",
+      "font-weight": o.weight || 400,
+      "letter-spacing": o.ls || 0.4,
+    });
+    t.textContent = text;
+    g.appendChild(t);
+  }
+
+  const host = document.getElementById("drawings");
+
+  layouts.forEach((L) => {
+    const wmm = L.hp * 5.08 - 0.4;
+    const w = wmm * S + M * 2;
+    const h = PH * S + M * 2;
+
+    const wrap = document.createElement("div");
+    wrap.className = "opt";
+
+    const head = document.createElement("div");
+    head.className = "opt-head";
+    head.innerHTML =
+      '<span class="opt-hp">' + L.hp + " HP</span>" +
+      '<span class="opt-tag ' + L.cls + '">' + L.tag + "</span>";
+    wrap.appendChild(head);
+
+    const svg = el("svg", { width: w, height: h, viewBox: "0 0 " + w + " " + h,
+      role: "img", "aria-label": L.hp + " HP zigzag panel layout, drawn to scale" });
+
+    svg.appendChild(el("rect", { x: X(0), y: Y(0), width: wmm * S, height: PH * S,
+      fill: "var(--panel-face)", stroke: "var(--panel-edge)", "stroke-width": 1, rx: 1.5 }));
+
+    [4.5, PH - 4.5].forEach((ymm) => {
+      [3.5, wmm - 3.5].forEach((xmm) => {
+        svg.appendChild(el("circle", { cx: X(xmm), cy: Y(ymm), r: 1.6 * S,
+          fill: "var(--panel-hole)", stroke: "var(--panel-edge)", "stroke-width": 0.8 }));
+      });
+    });
+
+    const g = el("g", {});
+    svg.appendChild(g);
+
+    // faint centreline — the LED spine, running the length of the zigzag only
+    svg.insertBefore(el("line", { x1: X(L.led), y1: Y(8), x2: X(L.led), y2: Y(86),
+      stroke: "var(--panel-edge)", "stroke-width": 0.6, "stroke-dasharray": "2 3",
+      opacity: 0.5 }), g);
+    // rule separating the channel zigzag from the bus block
+    svg.insertBefore(el("line", { x1: X(4), y1: Y(86.5), x2: X(wmm - 4), y2: Y(86.5),
+      stroke: "var(--panel-edge)", "stroke-width": 0.6, opacity: 0.55 }), g);
+
+    // channels — LED lifted clear of the toggle nut, its number directly beneath it
+    ROWS.forEach((ymm, i) => {
+      const sx = i % 2 === 0 ? L.swL : L.swR;
+      toggle(g, sx, ymm, STATE[i]);
+      led(g, L.led, ymm - LED_RISE);
+      label(g, L.led, ymm + 2.9, String(i + 1),
+        { size: 8, fill: "var(--ink)", weight: 700 });
+    });
+
+    // EXT jack — ninth zigzag position, one full step below channel 8 (left column)
+    jack(g, L.swL, EXT_Y);
+    label(g, L.led + (L.hp === 6 ? 3.4 : 5.6), EXT_Y + 1.2, "EXT", { size: 7.5, weight: 700 });
+
+    // bottom block: two buses side by side — LED, vertical mode toggle, output jack
+    [["A", L.swL, "U"], ["B", L.swR, "D"]].forEach(([bus, xmm, thr]) => {
+      led(g, xmm, BUS_LED_Y);
+      toggle(g, xmm, BUS_SW_Y, thr);
+      jack(g, xmm, BUS_JACK_Y);
+      label(g, xmm, BUS_JACK_Y + 8.4, bus, { size: 9, fill: "var(--ink)", weight: 700 });
+    });
+
+    // OR above / AND below, read off the vertical throw
+    label(g, L.led, BUS_SW_Y - 2.2, "OR", { size: 5.4, fill: "var(--ink-3)" });
+    label(g, L.led, BUS_SW_Y + 3.6, "AND", { size: 5.4, fill: "var(--ink-3)" });
+
+    // width dimension
+    const dy = Y(PH) + 13;
+    svg.appendChild(el("line", { x1: X(0), y1: dy, x2: X(wmm), y2: dy,
+      stroke: "var(--dim)", "stroke-width": 1 }));
+    [0, wmm].forEach((xmm) => {
+      svg.appendChild(el("line", { x1: X(xmm), y1: dy - 3.5, x2: X(xmm), y2: dy + 3.5,
+        stroke: "var(--dim)", "stroke-width": 1 }));
+    });
+    const dt = el("text", { x: X(wmm / 2), y: dy + 15, "text-anchor": "middle",
+      "font-family": "ui-monospace, SF Mono, Menlo, Consolas, monospace",
+      "font-size": 10, fill: "var(--dim)" });
+    dt.textContent = wmm.toFixed(1) + " mm";
+    svg.appendChild(dt);
+
+    wrap.appendChild(svg);
+
+    const note = document.createElement("p");
+    note.className = "opt-note";
+    note.textContent = L.note;
+    wrap.appendChild(note);
+
+    host.appendChild(wrap);
+  });
+</script>

@@ -1,0 +1,26 @@
+# --- superseded designs (kept on disk, out of git) ---
+/Hardware/pulses_plus/
+/Hardware/pulses_rev2.kicad_*
+/Hardware/pulses_rev2_1.kicad_sch
+/Hardware/pulses_rev2-eagle-import.kicad_sym
+/Hardware/pulses_rev2-backups/
+/Hardware/sym-lib-table
+
+# --- editor / tool noise ---
+.history/
+*-backups/
+__pycache__/
+*.pyc
+*.bak
+*.kicad_prl
+3DxService.log
+fp-info-cache
+
+# --- large regenerable 3D exports (note: *.stp models ARE tracked) ---
+*.step
+
+# --- unrelated / scratch material at repo root ---
+/Chat.txt
+/path30.svg
+/35b7dfbfa6932128de90f6daab893b4a.*
+/*.pdf

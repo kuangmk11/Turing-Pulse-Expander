@@ -1,0 +1,58 @@
+(footprint "SW_200_MDP3_DPDT"
+	(version 20240108)
+	(generator "hand")
+	(layer "F.Cu")
+	(descr "Taiway 200-MDP3-T2B1M2QE sub-miniature DPDT ON-OFF-ON toggle, PCB vertical. M2 PC thru-hole terminals on a 2.54 x 5.08 grid, 10-48 UNS bushing (o4.80 thread, 5.50 high, flat) -> o4.95 panel hole. Body 8.10 (throw axis, X) x 9.10. PAD 1 and PAD 4 ARE THE CENTRE PINS = the switch's commons. This is a DELIBERATE remap of the datasheet's numbering (which calls the centre terminals 2 and 5): the schematic drives the common from SW_DPDT_x2 pin 1/4 (A), so pad 1/4 must be the centre for the common net to land on the common terminal. SW_DPDT_x2 draws its blade pivoting at pin B, but that is cosmetic -- KiCad does not model switch internals in a netlist, only pin->pad->terminal. Do not 'correct' this to datasheet numbering without also rewiring every switch in the schematic.")
+	(tags "toggle switch dpdt on-off-on subminiature taiway 200 eurorack")
+	(attr through_hole)
+	(property "Reference" "SW" (at 0 -6.0 0) (layer "F.SilkS")
+		(uuid 5b1e1c60-3f1a-4a2e-9c1d-7a2f4b8e0d11) (effects (font (size 1 1) (thickness 0.15)))
+	)
+	(property "Value" "SW_200_MDP3_DPDT" (at 0 6.0 0) (layer "F.Fab")
+		(uuid 5b1e1c60-3f1a-4a2e-9c1d-7a2f4b8e0d12) (effects (font (size 1 1) (thickness 0.15)))
+	)
+	(fp_rect
+		(start -4.05 -4.55) (end 4.05 4.55)
+		(stroke (width 0.1) (type default)) (fill no)
+		(layer "F.Fab") (uuid 5b1e1c60-3f1a-4a2e-9c1d-7a2f4b8e0d13)
+	)
+	(fp_rect
+		(start -4.3 -4.8) (end 4.3 4.8)
+		(stroke (width 0.05) (type default)) (fill no)
+		(layer "F.CrtYd") (uuid 5b1e1c60-3f1a-4a2e-9c1d-7a2f4b8e0d14)
+	)
+	(fp_line
+		(start -4.05 -4.85) (end 4.05 -4.85)
+		(stroke (width 0.12) (type default))
+		(layer "F.SilkS") (uuid 5b1e1c60-3f1a-4a2e-9c1d-7a2f4b8e0d15)
+	)
+	(pad "1" thru_hole circle
+		(at 0 -2.54) (size 1.7 1.7) (drill 1.1)
+		(layers "*.Cu" "*.Mask") (uuid 5b1e1c60-3f1a-4a2e-9c1d-7a2f4b8e0d21)
+	)
+	(pad "2" thru_hole circle
+		(at 2.54 -2.54) (size 1.7 1.7) (drill 1.1)
+		(layers "*.Cu" "*.Mask") (uuid 5b1e1c60-3f1a-4a2e-9c1d-7a2f4b8e0d22)
+	)
+	(pad "3" thru_hole circle
+		(at -2.54 -2.54) (size 1.7 1.7) (drill 1.1)
+		(layers "*.Cu" "*.Mask") (uuid 5b1e1c60-3f1a-4a2e-9c1d-7a2f4b8e0d23)
+	)
+	(pad "4" thru_hole circle
+		(at 0 2.54) (size 1.7 1.7) (drill 1.1)
+		(layers "*.Cu" "*.Mask") (uuid 5b1e1c60-3f1a-4a2e-9c1d-7a2f4b8e0d24)
+	)
+	(pad "5" thru_hole circle
+		(at 2.54 2.54) (size 1.7 1.7) (drill 1.1)
+		(layers "*.Cu" "*.Mask") (uuid 5b1e1c60-3f1a-4a2e-9c1d-7a2f4b8e0d25)
+	)
+	(pad "6" thru_hole circle
+		(at -2.54 2.54) (size 1.7 1.7) (drill 1.1)
+		(layers "*.Cu" "*.Mask") (uuid 5b1e1c60-3f1a-4a2e-9c1d-7a2f4b8e0d26)
+	)
+	(model "${KIPRJMOD}/3d/200MDPxT2B1M2xE.stp"
+		(offset (xyz 0 0 0))
+		(scale (xyz 1 1 1))
+		(rotate (xyz 0 0 0))
+	)
+)
