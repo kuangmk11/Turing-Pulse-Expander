@@ -209,7 +209,7 @@
 			(thermal_bridge_angle 0)
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/SW-T2-4E-B-A2-MA2/3D/PJ301M-12 Thonkiconn v0.2.stp"
+		(model "${KIPRJMOD}/3d/PJ301M-12 Thonkiconn v0.2.stp"
 		(offset (xyz 0 0 0))
 		(scale (xyz 1 1 1))
 		(rotate (xyz 0 0 0))

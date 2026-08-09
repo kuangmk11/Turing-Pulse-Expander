@@ -83,7 +83,7 @@
 			(outputdirectory "gerbers/")
 		)
 	)
-	(footprint "Panel:Hole_3.2mm"
+	(footprint "pulses_plus_submin:Hole_3.2mm"
 		(layer "F.Cu")
 		(uuid "05976d76-30b7-4ffc-b0fc-499a36901d7b")
 		(at 119.34 37.907)
@@ -145,7 +145,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "Panel:Hole_4.95mm"
+	(footprint "pulses_plus_submin:Hole_4.95mm"
 		(layer "F.Cu")
 		(uuid "12994b5f-0eab-49f9-9f04-a8b2b68a5689")
 		(at 119.64 132.482)
@@ -207,7 +207,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "Panel:Hole_4.95mm"
+	(footprint "pulses_plus_submin:Hole_4.95mm"
 		(layer "F.Cu")
 		(uuid "247350a6-24a7-4daa-ae4a-968d740a5284")
 		(at 144.2 74.807)
@@ -269,7 +269,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "Panel:Hole_4.95mm"
+	(footprint "pulses_plus_submin:Hole_4.95mm"
 		(layer "F.Cu")
 		(uuid "263c762c-c1d8-4fa6-bb6b-4b0b43524e83")
 		(at 119.64 98.807)
@@ -331,7 +331,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "Panel:Hole_3.2mm"
+	(footprint "pulses_plus_submin:Hole_3.2mm"
 		(layer "F.Cu")
 		(uuid "34b17669-b1aa-47c1-a20b-c0bfbf60ab67")
 		(at 131.92 96.307)
@@ -393,7 +393,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "Panel:Hole_4.95mm"
+	(footprint "pulses_plus_submin:Hole_4.95mm"
 		(layer "F.Cu")
 		(uuid "42d1a25e-7056-4947-b61d-9b515cb70e2d")
 		(at 144.2 58.807)
@@ -455,7 +455,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "Panel:Hole_4.95mm"
+	(footprint "pulses_plus_submin:Hole_4.95mm"
 		(layer "F.Cu")
 		(uuid "4f16abf0-163d-4738-95cb-6a61315c61ea")
 		(at 119.64 66.807)
@@ -517,7 +517,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "Panel:Hole_6mm"
+	(footprint "pulses_plus_submin:Hole_6mm"
 		(layer "F.Cu")
 		(uuid "55c14cf0-7de1-4cc1-a41b-28a36d8307ef")
 		(at 144.2 146.332)
@@ -579,7 +579,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "Panel:Hole_3.2mm"
+	(footprint "pulses_plus_submin:Hole_3.2mm"
 		(layer "F.Cu")
 		(uuid "5e5c7eae-660f-4234-a30c-175cfa72a232")
 		(at 131.92 72.307)
@@ -641,7 +641,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "Panel:Hole_3.2mm"
+	(footprint "pulses_plus_submin:Hole_3.2mm"
 		(layer "F.Cu")
 		(uuid "64b1a791-43df-4ad9-ab01-c847a7bc1388")
 		(at 119.64 122.6)
@@ -703,7 +703,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "Panel:Hole_3.2mm"
+	(footprint "pulses_plus_submin:Hole_3.2mm"
 		(layer "F.Cu")
 		(uuid "78aed673-aa90-4708-878a-ab020c301c10")
 		(at 131.92 56.307)
@@ -765,7 +765,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "Panel:Hole_3.2mm"
+	(footprint "pulses_plus_submin:Hole_3.2mm"
 		(layer "F.Cu")
 		(uuid "7f618a62-6840-47f8-a742-6a5e53fe006c")
 		(at 144.5 160.407)
@@ -827,7 +827,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "Panel:Hole_3.2mm"
+	(footprint "pulses_plus_submin:Hole_3.2mm"
 		(layer "F.Cu")
 		(uuid "94f3f88c-b752-4af5-85cb-224057fca391")
 		(at 144.5 37.907)
@@ -889,7 +889,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "Panel:Hole_3.2mm"
+	(footprint "pulses_plus_submin:Hole_3.2mm"
 		(layer "F.Cu")
 		(uuid "9ae33a26-62a0-46bd-bb29-1d1fe12cd20f")
 		(at 119.34 160.407)
@@ -951,7 +951,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "Panel:Hole_3.2mm"
+	(footprint "pulses_plus_submin:Hole_3.2mm"
 		(layer "F.Cu")
 		(uuid "9d7c7a8f-1e07-4f68-9f78-c873de45f678")
 		(at 131.92 88.307)
@@ -1013,7 +1013,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "Panel:Hole_4.95mm"
+	(footprint "pulses_plus_submin:Hole_4.95mm"
 		(layer "F.Cu")
 		(uuid "acf9a2e7-15f3-406e-b373-cad15406555d")
 		(at 119.64 82.807)
@@ -1075,7 +1075,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "Panel:Hole_4.95mm"
+	(footprint "pulses_plus_submin:Hole_4.95mm"
 		(layer "F.Cu")
 		(uuid "b196a9f9-acfa-4d43-b31f-acdae4a010ca")
 		(at 119.64 50.807)
@@ -1137,7 +1137,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "Panel:Hole_3.2mm"
+	(footprint "pulses_plus_submin:Hole_3.2mm"
 		(layer "F.Cu")
 		(uuid "c1a196e7-d84e-4323-b4a0-fb427ece803b")
 		(at 131.92 104.307)
@@ -1199,7 +1199,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "Panel:Hole_6mm"
+	(footprint "pulses_plus_submin:Hole_6mm"
 		(layer "F.Cu")
 		(uuid "c27a4024-726c-4104-9bd8-031a3afbdabd")
 		(at 119.64 146.332)
@@ -1261,7 +1261,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "Panel:Hole_4.95mm"
+	(footprint "pulses_plus_submin:Hole_4.95mm"
 		(layer "F.Cu")
 		(uuid "c4d60ff4-f71e-464d-90de-20f98b95553b")
 		(at 144.2 132.482)
@@ -1323,7 +1323,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "Panel:Hole_4.95mm"
+	(footprint "pulses_plus_submin:Hole_4.95mm"
 		(layer "F.Cu")
 		(uuid "c8460d17-08a9-4bf8-8d50-3b06d1a21f7b")
 		(at 144.2 106.807)
@@ -1385,7 +1385,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "Panel:Hole_3.2mm"
+	(footprint "pulses_plus_submin:Hole_3.2mm"
 		(layer "F.Cu")
 		(uuid "cf1935b9-f95a-418b-be59-6f1f434a1779")
 		(at 131.92 64.307)
@@ -1447,7 +1447,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "Panel:Hole_6mm"
+	(footprint "pulses_plus_submin:Hole_6mm"
 		(layer "F.Cu")
 		(uuid "df87f92c-d2a9-4f3d-9aeb-d5a8d2f3fb8c")
 		(at 119.64 112.243)
@@ -1509,7 +1509,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "Panel:Hole_3.2mm"
+	(footprint "pulses_plus_submin:Hole_3.2mm"
 		(layer "F.Cu")
 		(uuid "eba04d81-32e4-46b1-8e08-3734cf738f0f")
 		(at 131.92 48.307)
@@ -1571,7 +1571,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "Panel:Hole_3.2mm"
+	(footprint "pulses_plus_submin:Hole_3.2mm"
 		(layer "F.Cu")
 		(uuid "ee824706-4ae6-47f8-8154-531c9ba0cb9f")
 		(at 144.2 122.6)
@@ -1633,7 +1633,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "Panel:Hole_3.2mm"
+	(footprint "pulses_plus_submin:Hole_3.2mm"
 		(layer "F.Cu")
 		(uuid "f982fe2c-8d85-47db-92f0-5d55f48f699c")
 		(at 131.92 80.307)
@@ -1695,7 +1695,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "Panel:Hole_4.95mm"
+	(footprint "pulses_plus_submin:Hole_4.95mm"
 		(layer "F.Cu")
 		(uuid "fa6c8060-f1f3-4d02-94f1-102caae2acaf")
 		(at 144.2 90.807)

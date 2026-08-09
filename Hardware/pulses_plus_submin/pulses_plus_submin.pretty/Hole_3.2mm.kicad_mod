@@ -1,0 +1,57 @@
+(footprint "Hole_3.2mm"
+	(descr "Panel mounting hole, 3.2 mm non-plated. Origin at the hole centre. Previously supplied by an out-of-tree 'Panel' library; vendored here so the panel project opens on any machine. Pad layers are *.Cu plus 'Rescue', matching the placed instances byte-for-byte. 'Rescue' is a stale layer name inherited from the original out-of-tree Panel library and is NOT in the panel's layer table, so KiCad ignores it and the hole gets no mask aperture. Do not 'correct' it to *.Mask: that would open soldermask around every hole, changing the already-fabbed gerbers, and would raise 27 lib_footprint_mismatch DRC errors.")
+	(version 20260206)
+	(generator "extracted-from-board")
+	(layer "F.Cu")
+	(attr exclude_from_pos_files exclude_from_bom allow_missing_courtyard)
+	(property "Reference" ""
+		(at 0 0 0)
+		(layer "F.SilkS")
+		(hide yes)
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "mounting"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+	)
+	(duplicate_pad_numbers_are_jumpers no)
+	(pad "" np_thru_hole circle
+		(at 0 0)
+		(size 3.2 3.2)
+		(drill 3.2)
+		(layers "*.Cu" "Rescue")
+	)
+	(embedded_fonts no)
+)
