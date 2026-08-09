@@ -3484,7 +3484,7 @@
 		)
 	)
 	(gr_text "OR"
-		(at 131.84 128.082 0)
+		(at 131.8 137.8 0)
 		(layer "F.SilkS")
 		(uuid "d04ab6f0-3228-47c0-a07b-88567983b711")
 		(effects
@@ -3495,7 +3495,7 @@
 		)
 	)
 	(gr_text "AND"
-		(at 131.84 137.682 0)
+		(at 132.1 127.3 0)
 		(layer "F.SilkS")
 		(uuid "fdc66a92-d002-46d3-905c-405f6b45bf7b")
 		(effects
