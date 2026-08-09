@@ -1,0 +1,31 @@
+# Line-ending policy.
+#
+# KiCad on Windows writes CRLF; this repo stores LF. Without these rules a clone
+# made on one platform shows every CRLF file as wholly rewritten on the other.
+#
+# Default is deliberately hands-off so files inherited from upstream
+# (Collateral/, Hardware/pulses_rev2.brd, Hardware/pulses_rev2.sch) stay
+# byte-identical to TomWhitwell/Turing-Pulse-Expander and don't conflict on merge.
+* -text
+
+# Our own trees: normalise to LF in the repo, checkout native.
+Docs/** text=auto eol=lf
+Hardware/pulses_plus_submin/** text=auto eol=lf
+Hardware/pulses_plus_vcvrack/** text=auto eol=lf
+.gitignore text eol=lf
+.gitattributes text eol=lf
+
+# STEP models are ASCII, so they normalise fine, but diffing them is noise.
+*.stp text eol=lf -diff
+*.step text eol=lf -diff
+
+# Genuinely binary — never touch the bytes.
+*.zip binary
+*.pdf binary
+*.jpg binary
+*.jpeg binary
+*.png binary
+*.dll binary
+*.so binary
+*.dylib binary
+*.vcvplugin binary
