@@ -121,4 +121,20 @@ Its BOM:
 
 ## Licence
 
-Designed by Missing Mile Modular. **CC BY-NC-SA 4.0**, as printed on the back of the panel.
+Two different things live in this repository, under different terms.
+
+**Pulses Plus** — `Hardware/pulses_plus_submin/`, `Hardware/pulses_plus_vcvrack/` and `Docs/` —
+is designed by Missing Mile Modular and licensed **CC BY-NC-SA 4.0**, as printed on the back of
+the panel. It is an independent design, not a derivative of the board below: different topology
+(a diode merge matrix into CD4050/CD40106 buffers, rather than a 4081), different parts, no
+shared schematic symbols. What it shares is the 16-pin expander ribbon pinout, which is an
+interface it has to match to interoperate.
+
+**The Rev 2 Turing Pulse Expander** — `Hardware/pulses_rev2.brd`, `Hardware/pulses_rev2.sch` and
+`Collateral/` — is Tom Whitwell's, inherited from
+[TomWhitwell/Turing-Pulse-Expander](https://github.com/TomWhitwell/Turing-Pulse-Expander) by
+forking. **That repository states no licence**, so those files carry whatever terms he intends;
+nothing here grants rights over them. For context, the parent
+[Turing Machine](https://github.com/TomWhitwell/TuringMachine) project's README states
+[CC-BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), but that is not stated in the
+expander repository itself.
