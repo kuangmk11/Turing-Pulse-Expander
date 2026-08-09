@@ -1,6 +1,6 @@
 # Front panel style
 
-**Version 1.03.**
+**Version 1.04.**
 
 House style for my module front panels — what marks go on them, what each one means, and
 where it sits. It is a drawing spec, not a program: a panel is in the style if it satisfies
@@ -201,7 +201,12 @@ at `SMALL_SIZE` or just under:
 | | |
 |---|---|
 | credit | `DESIGNED BY MISSING MILE MODULAR <year>` — the year the artwork was cut, not the year the circuit was designed |
-| licence | the short form alone, e.g. `CC-BY-SA`. No URL: it will not be read off the back of a module, and it costs a line |
+| licence | the short form **with its version**, e.g. `CC BY-NC-SA 4.0`. No URL: it will not be read off the back of a module, and it costs a line |
+
+The licence is stated exactly, clause letters and all. `CC-BY-SA` and `CC BY-NC-SA 4.0`
+are different licences — one permits commercial builds of the module, the other does not —
+and the back of the panel is where that is on the record. Carry the version number too: the
+CC licences are not identical across versions, and a bare family name dates badly.
 
 Wrap the credit rather than shrink it. Below about 1.2 mm the strokes start to fill in on
 black soldermask, so a long name becomes two lines at the small size, never one line at a
@@ -323,7 +328,7 @@ bump.
 Two things move together, and a change that touches only one of them is incomplete:
 
 1. the version line at the top of this file;
-2. the filename — `PANEL_STYLE_v1.03.md` → `PANEL_STYLE_v1.04.md`. Rename with `git mv` so
+2. the filename — `PANEL_STYLE_v1.04.md` → `PANEL_STYLE_v1.05.md`. Rename with `git mv` so
    the history follows the file.
 
 Then update anything pointing at the old filename (`README.md`).
