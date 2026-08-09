@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""Build pulses_plus_submin_panel_v2.kicad_pcb in the house style.
+"""Build pulses_plus_submin_panel_v4.kicad_pcb in the house style.
 
 Reads the v1 panel and keeps its header, layer table, setup, all 27 control
 holes, the Edge.Cuts outline and the copper (zones + segments) untouched --
 PANEL_STYLE's one non-negotiable rule is that hole positions are inherited,
 never computed. Only the silkscreen/mask artwork is regenerated.
 
-Usage:  python3 tools/build_panel_v2.py
+Usage:  python3 tools/build_panel.py
 """
 
 import re
@@ -15,7 +15,7 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent.parent
 SRC = HERE / "pulses_plus_submin_panel.kicad_pcb"
-DST = HERE / "pulses_plus_submin_panel_v2.kicad_pcb"
+DST = HERE / "pulses_plus_submin_panel_v4.kicad_pcb"
 
 # Panel origin in board coordinates, and its size. Both measured off v1.
 OX, OY = 111.84, 34.907
@@ -43,9 +43,11 @@ OUT_Y = 111.425
 
 R_LED, R_SW, R_JACK = 1.6, 2.475, 3.0
 
-# Two lines: at 18 characters a single line needs 61 mm of pitch on a 40 mm
-# panel, which shrinks the title to label size and stops it reading as a title.
-TITLE_LINES = ["DOUBLEPLUS", "++PULSES"]
+# The full name, DOUBLEPLUS++PULSES, is eighteen characters: on one line it
+# shrinks to label size, on two it eats the whole band above the first LED.
+# The short form runs one line at full TITLE_SIZE and still names the module.
+TITLE_LINES = ["++PULSES"]
+TITLE_Y = 7.5            # set explicitly; the band centre would sit 0.7 lower
 WORDMARK = "MMM"
 YEAR = 2026
 BACK_LINES = ["DESIGNED BY", f"MISSING MILE MODULAR {YEAR}", "CC BY-NC-SA 4.0"]
@@ -177,7 +179,8 @@ size = round(min(TITLE_SIZE, (band_bot - band_top - LEAD * (n - 1)) / n), 3)
 pitch = round(size * PITCH_TITLE / TITLE_SIZE, 4)
 assert pitch * max(len(t) for t in TITLE_LINES) <= W - 2 * EDGE_MARGIN, "title too wide"
 step = size + LEAD
-y0 = (band_top + band_bot) / 2.0 - step * (n - 1) / 2.0
+centre = TITLE_Y if TITLE_Y is not None else (band_top + band_bot) / 2.0
+y0 = centre - step * (n - 1) / 2.0
 for i, t in enumerate(TITLE_LINES):
     text(t, W / 2, y0 + i * step, size, pitch)
 
