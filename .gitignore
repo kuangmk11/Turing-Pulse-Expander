@@ -14,6 +14,8 @@ __pycache__/
 *.bak
 *.kicad_prl
 3DxService.log
+*.lck
+~*.lck
 fp-info-cache
 
 # --- large regenerable 3D exports (note: *.stp models ARE tracked) ---
