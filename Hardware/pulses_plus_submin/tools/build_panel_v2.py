@@ -121,6 +121,43 @@ def rect(x1, y1, x2, y2, width=RULE_W, layer="F.SilkS"):
     )
 
 
+def arc(sx, sy, mx, my, ex, ey, width=0.1, layer="Edge.Cuts"):
+    out.append(
+        f"\t(gr_arc\n"
+        f"\t\t(start {sx + OX:.4f} {sy + OY:.4f})\n"
+        f"\t\t(mid {mx + OX:.4f} {my + OY:.4f})\n"
+        f"\t\t(end {ex + OX:.4f} {ey + OY:.4f})\n"
+        f"\t\t(stroke\n\t\t\t(width {width})\n\t\t\t(type solid)\n\t\t)\n"
+        f'\t\t(layer "{layer}")\n\t\t(uuid "{uid()}")\n\t)'
+    )
+
+
+def slot(cx, cy, length=6.4, height=3.2):
+    """A milled obround on Edge.Cuts: two semicircular ends joined by flats.
+    Horizontal, so the module can slide +/- (length - height)/2 to meet its
+    neighbours."""
+    r = height / 2.0
+    dx = length / 2.0 - r
+    arc(cx + dx, cy - r, cx + dx + r, cy, cx + dx, cy + r)
+    line(cx + dx, cy + r, cx - dx, cy + r, width=0.1, layer="Edge.Cuts")
+    arc(cx - dx, cy + r, cx - dx - r, cy, cx - dx, cy - r)
+    line(cx - dx, cy - r, cx + dx, cy - r, width=0.1, layer="Edge.Cuts")
+
+
+def wire(pts):
+    """A connection: one knee, 0/90/45 segments only, stopping short of what
+    it joins. Emitted as silkscreen at LINE_W."""
+    for (x1, y1), (x2, y2) in zip(pts, pts[1:]):
+        line(x1, y1, x2, y2)
+
+
+def stop_short(cx, cy, r, gap, ux, uy):
+    """Point `gap` clear of a control of radius `r`, on the unit heading
+    (ux, uy) pointing away from its centre."""
+    d = r + gap
+    return cx + ux * d, cy + uy * d
+
+
 def below(drawn_r, size):
     """Centre-to-centre offset for a name sitting below what it names,
     measured from the drawn extent (a ring, not the hole) per PANEL_STYLE."""
@@ -130,12 +167,17 @@ def below(drawn_r, size):
 # --- title -------------------------------------------------------------------
 # The clear band runs from the bottom of the top mounting holes to the top of
 # LED1; the title is centred in it and shrinks only if it cannot fit.
-span = W - 2 * EDGE_MARGIN
-pitch = min(PITCH_TITLE, span / max(len(t) for t in TITLE_LINES))
-size = round(pitch * TITLE_SIZE / PITCH_TITLE, 3)
-band_top, band_bot = 3.0 + R_LED, LED_Y[0] - R_LED
-step = size + 0.4
-y0 = (band_top + band_bot) / 2.0 - step * (len(TITLE_LINES) - 1) / 2.0
+# The mounting slots are milled, so their edge is a board edge and the title
+# must keep EDGE_MARGIN off it -- as it must off the first LED hole below.
+LEAD = 0.4
+band_top = 3.0 + 3.2 / 2.0 + EDGE_MARGIN
+band_bot = LED_Y[0] - R_LED - EDGE_MARGIN
+n = len(TITLE_LINES)
+size = round(min(TITLE_SIZE, (band_bot - band_top - LEAD * (n - 1)) / n), 3)
+pitch = round(size * PITCH_TITLE / TITLE_SIZE, 4)
+assert pitch * max(len(t) for t in TITLE_LINES) <= W - 2 * EDGE_MARGIN, "title too wide"
+step = size + LEAD
+y0 = (band_top + band_bot) / 2.0 - step * (n - 1) / 2.0
 for i, t in enumerate(TITLE_LINES):
     text(t, W / 2, y0 + i * step, size, pitch)
 
@@ -179,6 +221,42 @@ for sign in (-1, 1):
     line(x0, wm_y, x0 + sign * 3.5, wm_y)
 text(WORDMARK, LED_X, wm_y, LOGO_SIZE, PITCH_LOGO)
 
+# --- mounting: regenerated to the standard grid ------------------------------
+# 8 HP is > 6 HP, so both columns, four slots. The 7.5 mm inset is the datum and
+# the grid steps out from it by N x 5.08, which puts the far column at 32.9 and
+# leaves a 7.26 mm margin on that side -- that is the way round that matters,
+# because the grid is what the rail is drilled to.
+MOUNT_X = (7.5, 7.5 + 5.08 * 5)
+MOUNT_Y = (3.0, H - 3.0)
+for mx in MOUNT_X:
+    for my in MOUNT_Y:
+        slot(mx, my)
+
+# --- wires: what connects to what -------------------------------------------
+# Replaces the decorative copper the v1 panel carried. Same idea -- the panel
+# shows its own signal flow -- but drawn as silkscreen at LINE_W, per the rule,
+# instead of as gaps in a copper pour.
+GAP = 1.0
+for (sx, sy), ly in zip(SW_XY, LED_Y):
+    # toggle -> its indicator LED. Leaves on the LED side, one 45 degree knee.
+    side = 1 if sx < LED_X else -1
+    ex, ey = stop_short(LED_X, ly, R_LED, GAP, -side * 0.7071, 0.7071)
+    knee_x = ex - side * abs(ey - sy)
+    # clear the throw mark on that side before starting the run
+    start_x = sx + side * (R_SW + LABEL_GAP + SMALL_SIZE + PITCH_SMALL / 2.0 + GAP)
+    wire([(start_x, sy), (knee_x, sy), (ex, ey)])
+
+# EXT normals into channel 8: unplugged, BIT8 feeds it; plugged, this jack does.
+ex, ey = stop_short(*SW_XY[7], R_SW, GAP, -0.7071, 0.7071)
+knee_x = ex - abs(ey - EXT_XY[1])
+wire([(EXT_XY[0] + R_JACK + GAP, EXT_XY[1]), (knee_x, EXT_XY[1]), (ex, ey)])
+
+# bus indicator -> mode switch -> output jack, in two runs: a single wire would
+# cross the mode switch, and a wire may not cross a control.
+for cx in (COL_L, COL_R):
+    wire([(cx, BUSLED_Y + R_LED + GAP), (cx, MODE_Y - R_SW - GAP)])
+    wire([(cx, MODE_Y + R_SW + GAP), (cx, OUT_Y - (R_JACK + RING_GAP) - GAP)])
+
 # --- back of panel -----------------------------------------------------------
 # Two clear bands on the back: 100.1-108.4 (below the mode switches, above the
 # output jacks) and 115-123.9 (below the jacks, above the mounting holes).
@@ -215,6 +293,24 @@ def top_level(src):
         i += 1
 
 
+def strip_subtree(node, head):
+    """Remove every `(head ...)` subtree, matching parens."""
+    while True:
+        i = node.find(head)
+        if i < 0:
+            return node
+        depth, j = 0, i
+        while j < len(node):
+            if node[j] == "(":
+                depth += 1
+            elif node[j] == ")":
+                depth -= 1
+                if depth == 0:
+                    break
+            j += 1
+        node = node[:i].rstrip() + node[j + 1 :]
+
+
 src = open(SRC, encoding="utf-8", newline="").read()
 kept, dropped = [], 0
 for node in top_level(src):
@@ -222,10 +318,22 @@ for node in top_level(src):
     if tag in ("gr_text", "gr_poly", "gr_curve", "gr_line", "gr_rect", "gr_circle", "gr_arc"):
         layer = re.search(r'\(layer "([^"]+)"', node)
         if layer and layer.group(1) == "Edge.Cuts":
-            kept.append(node)          # the outline is inherited
+            kept.append(node)          # the panel outline is inherited
         else:
             dropped += 1               # v1 artwork, replaced below
         continue
+    if tag == "segment":
+        dropped += 1                   # decorative copper, redrawn as silk
+        continue
+    if tag == "footprint":
+        val = re.search(r'\(property "Value" "([^"]*)"', node)
+        if val and val.group(1) == "mounting":
+            dropped += 1               # round holes -> regenerated slots
+            continue
+    if tag == "zone":
+        # the cached fill flowed around tracks that no longer exist; drop it so
+        # KiCad refills from scratch rather than plotting ghost clearances
+        node = strip_subtree(node, "(filled_polygon")
     kept.append(node)
 
 body = "\n".join("\t" + n.replace("\n", "\n") for n in kept)
