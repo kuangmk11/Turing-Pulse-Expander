@@ -1,3 +1,9 @@
+# --- Claude Code: machine-local settings ---
+# Shared project config (.claude/settings.json) is fine to commit. The *.local.json
+# files hold per-machine permission grants and absolute filesystem paths.
+.claude/settings.local.json
+.claude/*.local.json
+
 # --- superseded designs (kept on disk, out of git) ---
 /Hardware/pulses_plus/
 /Hardware/pulses_rev2.kicad_*
@@ -6,20 +12,45 @@
 /Hardware/pulses_rev2-backups/
 /Hardware/sym-lib-table
 
-# --- editor / tool noise ---
-.history/
+# --- KiCad editor / tool noise ---
 *-backups/
-__pycache__/
-*.pyc
-*.bak
 *.kicad_prl
-3DxService.log
+fp-info-cache
 *.lck
 ~*.lck
-fp-info-cache
+_autosave-*
+*.bak
+* - bak.*
+*-bak.*
+3DxService.log
+
+# --- KiCad generated reports and routing exchange ---
+*-erc.rpt
+*-drc.rpt
+*.dsn
+*.ses
 
 # --- large regenerable 3D exports (note: *.stp models ARE tracked) ---
 *.step
+
+# --- Python tooling ---
+__pycache__/
+*.pyc
+
+# --- editors ---
+.history/
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# --- OS / filesystem junk ---
+.DS_Store
+._*
+Thumbs.db
+ehthumbs.db
+desktop.ini
 
 # --- unrelated / scratch material at repo root ---
 /Chat.txt
