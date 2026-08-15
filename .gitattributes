@@ -9,9 +9,8 @@
 * -text
 
 # Our own trees: normalise to LF in the repo, checkout native.
+# (The pulses_plus_submin and pulses_plus_vcvrack rules left with those trees.)
 Docs/** text=auto eol=lf
-Hardware/pulses_plus_submin/** text=auto eol=lf
-Hardware/pulses_plus_vcvrack/** text=auto eol=lf
 .gitignore text eol=lf
 .gitattributes text eol=lf
 
