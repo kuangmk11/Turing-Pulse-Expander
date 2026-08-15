@@ -6,8 +6,8 @@
 
 | Live work | |
 |---|---|
-| **[pulses_plus_submin](https://github.com/kuangmk11/pulses_plus_submin)** | **Pulses Plus** — the built and tested hardware. KiCad schematic, PCB, panel v4, BOM, gerbers, and the full design write-up. CC BY-NC-SA 4.0. |
-| **[pulses_plus_vcvrack](https://github.com/kuangmk11/pulses_plus_vcvrack)** | The VCV Rack 2 port of the same module. GPL-3.0-or-later. |
+| **[Doubleplus_Pulses](https://github.com/kuangmk11/Doubleplus_Pulses)** | **Pulses Plus** — the built and tested hardware. KiCad schematic, PCB, panel v4, BOM, gerbers, and the full design write-up. CC BY-NC-SA 4.0. |
+| **[Doubleplus_Pulses_VCV](https://github.com/kuangmk11/Doubleplus_Pulses_VCV)** | The VCV Rack 2 port of the same module. GPL-3.0-or-later. |
 
 Both were extracted with `git subtree split`, so their commit history came with
 them. Their files remain in this repository's history too, up to the commit that
@@ -23,7 +23,7 @@ the OR or the AND of whatever is routed to it, chosen live from the panel. It
 generalises the stock Pulses expander's four hard-wired AND outputs into any subset
 of the eight bits, OR'd or AND'd, by hand.
 
-See [pulses_plus_submin](https://github.com/kuangmk11/pulses_plus_submin) for the
+See [Doubleplus_Pulses](https://github.com/kuangmk11/Doubleplus_Pulses) for the
 design and the write-up.
 
 ---
